@@ -1,9 +1,16 @@
 import { useState, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { generateMultipleSysEx } from '@/lib/sysex'
 import type { Operation, OperationType, EffectorNumber } from '@/types/operation'
 
-const EFFECTOR_NUMBERS: EffectorNumber[] = [1, 2, 3, 4, 5, 6]
+const EFFECTOR_NUMBERS: EffectorNumber[] = [6, 5, 4, 3, 2, 1]
 const OPERATION_TYPES: { type: OperationType; label: string }[] = [
   { type: 'on', label: 'ON' },
   { type: 'off', label: 'OFF' },
@@ -13,12 +20,31 @@ const OPERATION_TYPES: { type: OperationType; label: string }[] = [
 function App() {
   const [operations, setOperations] = useState<Operation[]>([])
   const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [isAdding, setIsAdding] = useState(false)
+  const [selectedType, setSelectedType] = useState<OperationType | null>(null)
 
   const output = operations.length > 0 ? generateMultipleSysEx(operations) : ''
 
-  const addOperation = useCallback((type: OperationType, effector: EffectorNumber) => {
-    setOperations(prev => [...prev, { type, effector }])
+  const startAdding = useCallback(() => {
+    setIsAdding(true)
+    setSelectedType(null)
   }, [])
+
+  const cancelAdding = useCallback(() => {
+    setIsAdding(false)
+    setSelectedType(null)
+  }, [])
+
+  const handleTypeSelect = useCallback((value: string) => {
+    setSelectedType(value as OperationType)
+  }, [])
+
+  const addOperation = useCallback((effector: EffectorNumber) => {
+    if (!selectedType) return
+    setOperations(prev => [...prev, { type: selectedType, effector }])
+    setIsAdding(false)
+    setSelectedType(null)
+  }, [selectedType])
 
   const removeOperation = useCallback((index: number) => {
     setOperations(prev => prev.filter((_, i) => i !== index))
@@ -58,25 +84,51 @@ function App() {
         <h1 className="text-xl font-bold mb-6 text-center">ZOOM MultiStomp Commander</h1>
 
         <section className="mb-6">
-          <h2 className="text-sm font-medium text-muted-foreground mb-3">Add Operation</h2>
-          <div className="grid grid-cols-3 gap-2">
-            {OPERATION_TYPES.map(({ type, label }) => (
-              <div key={type} className="space-y-2">
-                <div className="text-xs text-center text-muted-foreground">{label}</div>
-                {EFFECTOR_NUMBERS.map(num => (
-                  <Button
-                    key={`${type}-${num}`}
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                    onClick={() => addOperation(type, num)}
-                  >
-                    {num}
-                  </Button>
-                ))}
+          {!isAdding ? (
+            <Button onClick={startAdding} className="w-full">
+              + Add Operation
+            </Button>
+          ) : (
+            <div className="space-y-4 p-4 border rounded-lg">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm font-medium">Add Operation</h2>
+                <Button variant="ghost" size="sm" onClick={cancelAdding}>
+                  Cancel
+                </Button>
               </div>
-            ))}
-          </div>
+
+              <Select onValueChange={handleTypeSelect} value={selectedType ?? undefined}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select operation type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {OPERATION_TYPES.map(({ type, label }) => (
+                    <SelectItem key={type} value={type}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {selectedType && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-2">Select effect number</p>
+                  <div className="flex gap-2 justify-end">
+                    {EFFECTOR_NUMBERS.map(num => (
+                      <Button
+                        key={num}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => addOperation(num)}
+                      >
+                        {num}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </section>
 
         {operations.length > 0 && (
