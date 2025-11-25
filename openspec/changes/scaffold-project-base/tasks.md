@@ -2,34 +2,34 @@
 
 ## Phase 1: プロジェクト初期化
 
-- [ ] `pnpm create vite` でReact + TypeScriptプロジェクトを作成
-- [ ] 不要なボイラープレートファイルを削除
-- [ ] Tailwind CSSをインストール・設定
-- [ ] shadcn/uiをインストール・設定
-- [ ] ダークモード専用のテーマ設定
+- [x] `pnpm create vite` でReact + TypeScriptプロジェクトを作成
+- [x] 不要なボイラープレートファイルを削除
+- [x] Tailwind CSSをインストール・設定
+- [x] shadcn/uiをインストール・設定
+- [x] ダークモード専用のテーマ設定
 
 ## Phase 2: コアロジック実装
 
-- [ ] SysExメッセージ生成関数の実装 (`src/lib/sysex.ts`)
+- [x] SysExメッセージ生成関数の実装 (`src/lib/sysex.ts`)
   - エフェクターON生成
   - エフェクターOFF生成
   - エフェクター表示生成
-- [ ] 操作の型定義 (`src/types/operation.ts`)
+- [x] 操作の型定義 (`src/types/operation.ts`)
 
 ## Phase 3: UI実装
 
-- [ ] Buttonコンポーネント追加 (shadcn/ui)
-- [ ] エフェクター選択UI実装
-- [ ] 操作タイプ選択UI実装
-- [ ] 生成結果表示エリア実装
-- [ ] クリップボードコピーボタン実装
-- [ ] コピー成功フィードバック実装
+- [x] Buttonコンポーネント追加 (shadcn/ui)
+- [x] エフェクター選択UI実装
+- [x] 操作タイプ選択UI実装
+- [x] 生成結果表示エリア実装
+- [x] クリップボードコピーボタン実装
+- [x] コピー成功フィードバック実装
 
 ## Phase 4: 統合・仕上げ
 
-- [ ] App.tsxで全体を統合
-- [ ] モバイルファーストのレイアウト調整
-- [ ] 動作確認
+- [x] App.tsxで全体を統合
+- [x] モバイルファーストのレイアウト調整
+- [x] 動作確認
 
 ## Dependencies
 
