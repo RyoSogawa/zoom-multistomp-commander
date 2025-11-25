@@ -20,25 +20,19 @@ const OPERATION_TYPES: { type: OperationType; label: string }[] = [
 function App() {
   const [operations, setOperations] = useState<Operation[]>([])
   const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [selectedType, setSelectedType] = useState<OperationType>('on')
-  const [selectedEffector, setSelectedEffector] = useState<EffectorNumber>(1)
 
   const output = operations.length > 0 ? generateMultipleSysEx(operations) : ''
 
-  const handleTypeSelect = useCallback((value: string) => {
-    setSelectedType(value as OperationType)
-  }, [])
-
-  const handleEffectorSelect = useCallback((effector: EffectorNumber) => {
-    setSelectedEffector(effector)
-  }, [])
-
   const addOperation = useCallback(() => {
-    setOperations(prev => [...prev, { type: selectedType, effector: selectedEffector }])
-  }, [selectedType, selectedEffector])
+    setOperations(prev => [...prev, { type: 'on', effector: 1 }])
+  }, [])
 
-  const clearOperations = useCallback(() => {
-    setOperations([])
+  const updateOperation = useCallback((index: number, updates: Partial<Operation>) => {
+    setOperations(prev => prev.map((op, i) => i === index ? { ...op, ...updates } : op))
+  }, [])
+
+  const removeOperation = useCallback((index: number) => {
+    setOperations(prev => prev.filter((_, i) => i !== index))
   }, [])
 
   const copyToClipboard = useCallback(async () => {
@@ -68,45 +62,57 @@ function App() {
         <section className="mb-6 p-4 border rounded-lg space-y-4">
           <h2 className="text-sm font-medium">Operations</h2>
 
-          <Select onValueChange={handleTypeSelect} value={selectedType}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {OPERATION_TYPES.map(({ type, label }) => (
-                <SelectItem key={type} value={type}>
-                  {label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <div className="flex gap-2 justify-end">
-            {EFFECTOR_NUMBERS.map(num => (
-              <Button
-                key={num}
-                variant={selectedEffector === num ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => handleEffectorSelect(num)}
+          {operations.map((op, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <Select
+                value={op.type}
+                onValueChange={(value) => updateOperation(index, { type: value as OperationType })}
               >
-                {num}
-              </Button>
-            ))}
-          </div>
+                <SelectTrigger className="w-28">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {OPERATION_TYPES.map(({ type, label }) => (
+                    <SelectItem key={type} value={type}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-          <Button className="w-full" onClick={addOperation}>
-            Add
+              <div className="flex gap-1 flex-1 justify-end">
+                {EFFECTOR_NUMBERS.map(num => (
+                  <Button
+                    key={num}
+                    variant={op.effector === num ? 'default' : 'outline'}
+                    size="sm"
+                    className="w-8 h-8 p-0"
+                    onClick={() => updateOperation(index, { effector: num })}
+                  >
+                    {num}
+                  </Button>
+                ))}
+              </div>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-8 h-8 p-0 text-muted-foreground hover:text-destructive"
+                onClick={() => removeOperation(index)}
+              >
+                ×
+              </Button>
+            </div>
+          ))}
+
+          <Button variant="outline" className="w-full" onClick={addOperation}>
+            + Add Operation
           </Button>
         </section>
 
         {output && (
           <section>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-medium text-muted-foreground">Output</h2>
-              <Button variant="ghost" size="sm" onClick={clearOperations}>
-                Clear
-              </Button>
-            </div>
+            <h2 className="text-sm font-medium text-muted-foreground mb-3">Output</h2>
             <pre className="bg-card p-4 rounded-lg text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all mb-4">
               {output}
             </pre>
