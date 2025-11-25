@@ -131,14 +131,16 @@ function App() {
           )}
         </section>
 
-        {operations.length > 0 && (
-          <section className="mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-medium text-muted-foreground">Selected Operations</h2>
+        <section className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-medium text-muted-foreground">Selected Operations</h2>
+            {operations.length > 0 && (
               <Button variant="ghost" size="sm" onClick={clearOperations}>
                 Clear
               </Button>
-            </div>
+            )}
+          </div>
+          {operations.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {operations.map((op, index) => (
                 <Button
@@ -151,8 +153,10 @@ function App() {
                 </Button>
               ))}
             </div>
-          </section>
-        )}
+          ) : (
+            <p className="text-sm text-muted-foreground">No operations selected</p>
+          )}
+        </section>
 
         {output && (
           <section>
