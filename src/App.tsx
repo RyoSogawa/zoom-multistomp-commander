@@ -35,6 +35,10 @@ function App() {
     setOperations(prev => prev.filter((_, i) => i !== index))
   }, [])
 
+  const clearOperations = useCallback(() => {
+    setOperations([])
+  }, [])
+
   const copyToClipboard = useCallback(async () => {
     if (!output) return
 
@@ -60,7 +64,14 @@ function App() {
         <h1 className="text-xl font-bold mb-6 text-center">ZOOM MultiStomp Commander</h1>
 
         <section className="mb-6 p-4 border rounded-lg space-y-4">
-          <h2 className="text-sm font-medium">Operations</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-medium">Operations</h2>
+            {operations.length > 0 && (
+              <Button variant="ghost" size="sm" onClick={clearOperations}>
+                Clear All
+              </Button>
+            )}
+          </div>
 
           {operations.map((op, index) => (
             <div key={index} className="flex items-center gap-2">
