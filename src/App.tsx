@@ -7,7 +7,7 @@ const EFFECTOR_NUMBERS: EffectorNumber[] = [1, 2, 3, 4, 5, 6]
 const OPERATION_TYPES: { type: OperationType; label: string }[] = [
   { type: 'on', label: 'ON' },
   { type: 'off', label: 'OFF' },
-  { type: 'display', label: '表示' },
+  { type: 'display', label: 'Display' },
 ]
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
         <h1 className="text-xl font-bold mb-6 text-center">ZOOM MultiStomp Commander</h1>
 
         <section className="mb-6">
-          <h2 className="text-sm font-medium text-muted-foreground mb-3">操作を追加</h2>
+          <h2 className="text-sm font-medium text-muted-foreground mb-3">Add Operation</h2>
           <div className="grid grid-cols-3 gap-2">
             {OPERATION_TYPES.map(({ type, label }) => (
               <div key={type} className="space-y-2">
@@ -82,9 +82,9 @@ function App() {
         {operations.length > 0 && (
           <section className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-medium text-muted-foreground">選択した操作</h2>
+              <h2 className="text-sm font-medium text-muted-foreground">Selected Operations</h2>
               <Button variant="ghost" size="sm" onClick={clearOperations}>
-                クリア
+                Clear
               </Button>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -104,7 +104,7 @@ function App() {
 
         {output && (
           <section>
-            <h2 className="text-sm font-medium text-muted-foreground mb-3">出力</h2>
+            <h2 className="text-sm font-medium text-muted-foreground mb-3">Output</h2>
             <pre className="bg-card p-4 rounded-lg text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all mb-4">
               {output}
             </pre>
@@ -113,7 +113,7 @@ function App() {
               onClick={copyToClipboard}
               variant={copyStatus === 'success' ? 'secondary' : copyStatus === 'error' ? 'destructive' : 'default'}
             >
-              {copyStatus === 'success' ? 'コピーしました' : copyStatus === 'error' ? 'コピーに失敗しました' : 'クリップボードにコピー'}
+              {copyStatus === 'success' ? 'Copied!' : copyStatus === 'error' ? 'Copy failed' : 'Copy to Clipboard'}
             </Button>
           </section>
         )}
