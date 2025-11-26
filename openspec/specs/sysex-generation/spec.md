@@ -1,8 +1,10 @@
 # Capability: sysex-generation
 
+## Purpose
+
 ZOOM MultiStomp向けMIDI SysExメッセージの生成機能。
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: エフェクターON/OFFメッセージ生成
 

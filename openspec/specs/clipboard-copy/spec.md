@@ -1,8 +1,10 @@
 # Capability: clipboard-copy
 
+## Purpose
+
 生成されたSysExメッセージをクリップボードにコピーする機能。
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: ワンタッチコピー
 
