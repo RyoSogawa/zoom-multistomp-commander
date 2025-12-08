@@ -4,15 +4,16 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Clipboard Copy', () => {
-  test('should copy output to clipboard', async ({ page, context }) => {
+  test('should copy output to clipboard', async ({ page, context, browserName }) => {
+    test.skip(browserName !== 'chromium', 'Clipboard API read is only supported in Chromium');
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
 
     // 2. Note the SysEx output text
-    const outputText = await page.locator('div').filter({ hasText: /^F0 52 00 6E 64/ }).textContent();
+    const outputText = await page.locator('pre').textContent();
     expect(outputText).toBeTruthy();
 
     // 3. Click 'Copy to Clipboard' button

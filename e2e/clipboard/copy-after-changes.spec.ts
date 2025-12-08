@@ -4,8 +4,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Clipboard Copy', () => {
-  test('should copy updated output after changes', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+  test('should copy updated output after changes', async ({ page, context, browserName }) => {
+    test.skip(browserName !== 'chromium', 'Clipboard API read is only supported in Chromium');
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
@@ -17,8 +19,7 @@ test.describe('Clipboard Copy', () => {
     await page.getByRole('button', { name: 'Copy to Clipboard' }).click();
 
     // 4. Verify clipboard has first output
-    const firstClipboard = await page.evaluateHandle(() => navigator.clipboard.readText());
-    const firstOutput = await firstClipboard.jsonValue();
+    const firstOutput = await page.evaluate(() => navigator.clipboard.readText());
     expect(firstOutput).toBe('F0 52 00 6E 64 20 00 02 00 01 00 00 00 00 F7');
 
     // 5. Change to different configuration (OFF, effect 5)
@@ -33,8 +34,7 @@ test.describe('Clipboard Copy', () => {
     await page.getByRole('button', { name: 'Copy to Clipboard' }).click();
 
     // 8. Verify clipboard has updated output
-    const secondClipboard = await page.evaluateHandle(() => navigator.clipboard.readText());
-    const secondOutput = await secondClipboard.jsonValue();
+    const secondOutput = await page.evaluate(() => navigator.clipboard.readText());
     expect(secondOutput).toBe('F0 52 00 6E 64 20 00 04 00 00 00 00 00 00 F7');
     expect(secondOutput).not.toBe(firstOutput);
   });

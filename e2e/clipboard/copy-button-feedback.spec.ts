@@ -4,8 +4,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Clipboard Copy', () => {
-  test('should show button state change on copy', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+  test('should show button state change on copy', async ({ page, context, browserName }) => {
+    if (browserName === 'chromium') {
+      await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    }
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();

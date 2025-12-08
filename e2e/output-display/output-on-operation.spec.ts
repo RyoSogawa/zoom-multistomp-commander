@@ -5,13 +5,13 @@ import { test, expect } from '@playwright/test';
 
 test.describe('SysEx Output Display', () => {
   test('should display correct output for ON operation', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
 
     // 2. Verify operation type is 'ON'
-    await expect(page.getByText('ON')).toBeVisible();
+    await expect(page.getByRole('combobox')).toContainText('ON');
 
     // 3. Click effect number '1' button
     await page.getByRole('button', { name: '1' }).click();

@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Effect Number Selection', () => {
   test('should select effect number 1', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();

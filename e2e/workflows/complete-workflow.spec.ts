@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Complex Workflows', () => {
   test('should handle complete workflow', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Add three operations
     await page.getByRole('button', { name: '+ Add Operation' }).click();

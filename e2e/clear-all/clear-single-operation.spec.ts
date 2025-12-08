@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Clear All Operations', () => {
   test('should clear all operations with single operation', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();

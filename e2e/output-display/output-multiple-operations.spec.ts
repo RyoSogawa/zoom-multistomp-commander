@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('SysEx Output Display', () => {
   test('should display concatenated output for multiple operations', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();

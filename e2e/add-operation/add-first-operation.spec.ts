@@ -5,15 +5,16 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Add Operation', () => {
   test('should add first operation', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
 
     // 2. Verify operation is added with default values
     // 3. Verify operation type dropdown shows 'ON'
-    await expect(page.getByRole('combobox', { name: '' })).toBeVisible();
-    await expect(page.getByText('ON')).toBeVisible();
+    const combobox = page.getByRole('combobox');
+    await expect(combobox).toBeVisible();
+    await expect(combobox).toContainText('ON');
 
     // 4. Verify all effect number buttons (1-6) are visible
     await expect(page.getByRole('button', { name: '1' })).toBeVisible();

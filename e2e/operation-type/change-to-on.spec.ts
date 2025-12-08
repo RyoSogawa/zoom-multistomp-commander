@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Operation Type Selection', () => {
   test('should change operation type back to ON', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
@@ -23,7 +23,7 @@ test.describe('Operation Type Selection', () => {
     await page.getByRole('option', { name: 'ON' }).click();
 
     // 6. Verify dropdown shows 'ON'
-    await expect(page.getByText('ON')).toBeVisible();
+    await expect(page.getByRole('combobox')).toContainText('ON');
 
     // 7. Verify SysEx output is updated
     await expect(page.getByText('F0 52 00 6E 64 20 00 00 00 01 00 00 00 00 F7')).toBeVisible();

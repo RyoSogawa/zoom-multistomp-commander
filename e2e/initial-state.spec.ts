@@ -5,15 +5,15 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Initial State', () => {
   test('should display correct initial state', async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    await page.goto('/');
 
     await page.evaluate(() => {
       localStorage.clear();
       sessionStorage.clear();
     });
 
-    // 1. Navigate to http://localhost:5173
-    await page.goto('http://localhost:5173');
+    // 1. Navigate to /
+    await page.goto('/');
 
     // 2. Verify page title is 'ZOOM MultiStomp Commander'
     await expect(page.getByText('ZOOM MultiStomp Commander')).toBeVisible();
