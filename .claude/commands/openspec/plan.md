@@ -8,17 +8,18 @@ tags: [openspec, test, playwright]
 **Guardrails**
 - This command should be run AFTER the proposal is approved and BEFORE implementation (apply).
 - The test plan is derived from the proposal's spec deltas and requirements.
-- Save test plan to `changes/<id>/test-plan.md` for traceability.
+- Save test plan to `specs/test-plans/<nn>-<capability>.test-plan.md` for long-term storage.
 
 **Steps**
 1. Read `changes/<id>/proposal.md` and spec deltas in `changes/<id>/specs/` to understand what needs to be tested.
 2. Review existing specs in `openspec/specs/` to understand current behavior that should be preserved.
-3. Use the Task tool with `subagent_type: playwright-test-planner` to:
-   - Navigate to the application
+3. Check existing test plans in `specs/test-plans/` to determine the next sequence number.
+4. Use the Task tool with `subagent_type: playwright-test-planner` to:
+   - Navigate to the application (http://localhost:3001/ or http://localhost:5173/)
    - Analyze the UI based on the spec requirements
    - Create a comprehensive test plan covering all ADDED/MODIFIED requirements
-4. Save the generated test plan to `changes/<id>/test-plan.md` using `mcp__playwright-test__planner_save_plan`.
-5. Update `tasks.md` to include test implementation tasks referencing the test plan.
+5. Save the generated test plan to `specs/test-plans/<nn>-<capability>.test-plan.md`.
+6. Update `tasks.md` to include test implementation tasks referencing the test plan.
 
 **Test Plan Structure**
 The test plan should map directly to OpenSpec requirements:
@@ -28,5 +29,5 @@ The test plan should map directly to OpenSpec requirements:
 
 **Reference**
 - Use `openspec show <id> --json --deltas-only` to extract requirement details.
-- The test plan file name should follow: `tests/<capability>/<test-name>.spec.ts`
+- Test files should follow: `e2e/<capability>/<test-name>.spec.ts`
 <!-- OPENSPEC:END -->
