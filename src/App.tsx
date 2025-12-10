@@ -23,7 +23,7 @@ type OperationTypeConfig = {
 const OPERATION_TYPES: OperationTypeConfig[] = [
   { type: 'on', label: 'ON' },
   { type: 'off', label: 'OFF' },
-  { type: 'display', label: 'Display' },
+  { type: 'display', label: 'Disp' },
   { type: 'tuner', label: 'Tuner' },
   { type: 'patch-volume', label: 'Patch Volume' },
   { type: 'tempo', label: 'Tempo' },
