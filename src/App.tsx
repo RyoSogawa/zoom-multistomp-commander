@@ -11,6 +11,7 @@ import { generateMultipleSysEx } from '@/lib/sysex'
 import type { Operation, OperationType, EffectorNumber, EffectorOperation, TunerOperation, VolumeOperation, TempoOperation } from '@/types/operation'
 import { isEffectorOperation, isTunerOperation, isVolumeOperation, isTempoOperation } from '@/types/operation'
 import Footer from '@/components/Footer'
+import HelpModal from '@/components/HelpModal'
 
 const EFFECTOR_NUMBERS: EffectorNumber[] = [6, 5, 4, 3, 2, 1]
 
@@ -215,7 +216,10 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <main className="container mx-auto p-4 max-w-md flex-1">
-        <h1 className="text-xl font-bold mb-6 text-center">ZOOM MultiStomp Commander</h1>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <h1 className="text-xl font-bold text-center">ZOOM MultiStomp Commander</h1>
+          <HelpModal />
+        </div>
 
         <section className="mb-6 p-4 border rounded-lg space-y-4">
           <div className="flex items-center justify-between">
