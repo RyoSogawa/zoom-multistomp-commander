@@ -6,6 +6,10 @@ A web-based tool for generating SysEx commands to control ZOOM MultiStomp series
 
 **[Try it out](https://zoom-multistomp-commander.vercel.app/)**
 
+## Disclaimer
+
+This is an unofficial, community-made tool and is not affiliated with, endorsed by, or associated with ZOOM Corporation in any way. All product names, trademarks, and registered trademarks are property of their respective owners.
+
 ## What is this?
 
 This tool helps you create MIDI SysEx commands for ZOOM MS series pedals (MS-50G+, MS-70CDR+, etc.). You can use these commands with programmable MIDI controllers like M-VAVE Chocolate to remotely control your pedal.
