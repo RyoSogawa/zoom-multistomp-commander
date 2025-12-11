@@ -20,9 +20,9 @@ test.describe('Complex Workflows', () => {
     await page.getByRole('option', { name: 'OFF' }).click();
     await page.getByRole('button', { name: '3' }).nth(1).click();
 
-    // 4. Configure third: Display, effect 1
+    // 4. Configure third: Disp, effect 1
     await page.getByRole('combobox').nth(2).click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
     await page.getByRole('button', { name: '1' }).nth(2).click();
 
     // 5. Verify output shows all three operations (implicitly verified by the output text)

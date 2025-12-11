@@ -25,7 +25,7 @@ const OPERATION_TYPES: OperationTypeConfig[] = [
   { type: 'off', label: 'OFF' },
   { type: 'display', label: 'Disp' },
   { type: 'tuner', label: 'Tuner' },
-  { type: 'patch-volume', label: 'Patch Volume' },
+  // { type: 'patch-volume', label: 'Patch Volume' },
   { type: 'tempo', label: 'Tempo' },
 ]
 
@@ -214,7 +214,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-svh bg-background text-foreground flex flex-col">
       <main className="container mx-auto p-4 max-w-md flex-1">
         <div className="flex items-center justify-center gap-2 mb-6">
           <h1 className="text-xl font-bold text-center">ZOOM MultiStomp Commander</h1>

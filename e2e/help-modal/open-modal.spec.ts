@@ -4,8 +4,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Help Modal Interaction', () => {
   test('should open help modal when clicking help button', async ({ page }) => {
-    // 1. Navigate to http://localhost:3001/
-    await page.goto('http://localhost:3001/');
+    await page.goto('/');
 
     // 2. Click the '?' help button
     await page.getByRole('button').filter({ hasText: /^$/ }).click();

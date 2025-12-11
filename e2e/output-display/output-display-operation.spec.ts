@@ -10,9 +10,9 @@ test.describe('SysEx Output Display', () => {
     // 1. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
 
-    // 2. Click operation type dropdown and select 'Display'
+    // 2. Click operation type dropdown and select 'Disp'
     await page.getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
 
     // 3. Click effect number '4' button
     await page.getByRole('button', { name: '4' }).click();

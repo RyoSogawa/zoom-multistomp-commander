@@ -26,9 +26,9 @@ test.describe('SysEx Output Display', () => {
     // 6. Verify output changes again
     await expect(page.getByText('F0 52 00 6E 64 20 00 04 00 00 00 00 00 00 F7')).toBeVisible();
 
-    // 7. Change operation type to 'Display'
+    // 7. Change operation type to 'Disp'
     await page.getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
 
     // 8. Verify output changes to reflect Display command
     await expect(page.getByText('F0 52 00 6E 64 20 00 64 01 04 00 00 00 00 F7')).toBeVisible();

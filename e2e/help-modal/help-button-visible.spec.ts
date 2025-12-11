@@ -5,8 +5,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Help Button Display', () => {
   test('should display help button next to title', async ({ page }) => {
-    // 1. Navigate to http://localhost:3001/
-    await page.goto('http://localhost:3001/');
+    await page.goto('/');
 
     // Expected Results: A '?' button is visible next to the title 'ZOOM MultiStomp Commander'
     await expect(page.getByRole('heading', { name: 'ZOOM MultiStomp Commander' })).toBeVisible();

@@ -27,9 +27,9 @@ test.describe('SysEx Output Display', () => {
     // 8. Click '+ Add Operation' button
     await page.getByRole('button', { name: '+ Add Operation' }).click();
 
-    // 9. Configure third operation (Display, effect 4)
+    // 9. Configure third operation (Disp, effect 4)
     await page.getByRole('combobox').nth(2).click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
     await page.getByRole('button', { name: '4' }).nth(2).click();
 
     // 10. Verify output contains all three messages in order

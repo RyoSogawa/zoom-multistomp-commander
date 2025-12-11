@@ -16,7 +16,7 @@ test.describe('Clear All Operations', () => {
     await page.getByRole('combobox').first().click();
     await page.getByRole('option', { name: 'OFF' }).click();
     await page.getByRole('combobox').nth(1).click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
     await page.getByRole('button', { name: '2' }).nth(2).click();
 
     // 3. Verify all three operations are visible

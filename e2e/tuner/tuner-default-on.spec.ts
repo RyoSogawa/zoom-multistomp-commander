@@ -19,7 +19,7 @@ test.describe('Tuner Operation', () => {
     // 5. Verify switch UI is visible with OFF/ON labels
     const switchElement = page.getByRole('switch');
     await expect(switchElement).toBeVisible();
-    await expect(page.getByText('OFF')).toBeVisible();
+    await expect(page.getByText('OFF', { exact: true })).toBeVisible();
     await expect(page.getByText('ON', { exact: true })).toBeVisible();
 
     // 6. Verify switch is in ON position (checked)

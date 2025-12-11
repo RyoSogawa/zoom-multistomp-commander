@@ -13,10 +13,10 @@ test.describe('Complex Workflows', () => {
     await page.getByRole('option', { name: 'OFF' }).click();
     await page.getByRole('button', { name: '2' }).click();
 
-    // 2. Add second operation and configure as Display, effect 5
+    // 2. Add second operation and configure as Disp, effect 5
     await page.getByRole('button', { name: '+ Add Operation' }).click();
     await page.getByRole('combobox').filter({ hasText: 'ON' }).click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
     await page.getByRole('button', { name: '5' }).nth(1).click();
 
     // 3. Change first operation to ON, effect 3
@@ -24,16 +24,16 @@ test.describe('Complex Workflows', () => {
     await page.getByRole('option', { name: 'ON' }).click();
     await page.getByRole('button', { name: '3' }).first().click();
 
-    // 4. Verify second operation remains Display, effect 5
+    // 4. Verify second operation remains Disp, effect 5
     const secondOperationCombobox = page.getByRole('combobox').nth(1);
-    await expect(secondOperationCombobox).toContainText('Display');
+    await expect(secondOperationCombobox).toContainText('Disp');
 
     // 5. Delete first operation
     await page.getByRole('button', { name: '×' }).first().click();
 
-    // 6. Verify second operation still shows Display, effect 5
+    // 6. Verify second operation still shows Disp, effect 5
     const remainingCombobox = page.getByRole('combobox');
-    await expect(remainingCombobox).toContainText('Display');
+    await expect(remainingCombobox).toContainText('Disp');
 
     // 7. Add new operation
     await page.getByRole('button', { name: '+ Add Operation' }).click();
@@ -44,6 +44,6 @@ test.describe('Complex Workflows', () => {
 
     // 9. Verify previous operation unchanged
     const previousCombobox = page.getByRole('combobox').first();
-    await expect(previousCombobox).toContainText('Display');
+    await expect(previousCombobox).toContainText('Disp');
   });
 });

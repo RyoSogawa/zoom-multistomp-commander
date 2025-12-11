@@ -22,7 +22,7 @@ test.describe('Clipboard Copy', () => {
     await page.getByRole('button', { name: '2' }).nth(1).click();
 
     await page.getByRole('combobox').nth(2).click();
-    await page.getByRole('option', { name: 'Display' }).click();
+    await page.getByRole('option', { name: 'Disp' }).click();
     await page.getByRole('button', { name: '4' }).nth(2).click();
 
     // 3. Note the complete SysEx output with all operations
