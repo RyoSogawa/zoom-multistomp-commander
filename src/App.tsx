@@ -222,10 +222,10 @@ function App() {
         </div>
 
         <section className="mb-6 p-4 border rounded-lg space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="relative flex items-center">
             <h2 className="text-sm font-medium">Operations</h2>
             {operations.length > 0 && (
-              <Button variant="ghost" size="sm" onClick={clearOperations}>
+              <Button variant="ghost" size="sm" onClick={clearOperations} className="absolute right-0">
                 Clear All
               </Button>
             )}
